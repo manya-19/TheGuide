@@ -1,12 +1,14 @@
 package flint.durzo.theguide;
 
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
-import com.mapzen.speakerbox.Speakerbox;
+import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -15,18 +17,42 @@ public class HomeActivity extends AppCompatActivity {
     private FusedLocationProviderClient mFusedLocationClient;
     int LOCATION_REQUEST_CODE = 1;*/
 
+    TextToSpeech tts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        tts=new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+
+            @Override
+            public void onInit(int status) {
+                if(status == TextToSpeech.SUCCESS){
+                    int result=tts.setLanguage(Locale.ENGLISH);
+                    if(result==TextToSpeech.LANG_MISSING_DATA ||
+                            result==TextToSpeech.LANG_NOT_SUPPORTED){
+                        Log.e(TAG, "This Language is not supported");
+                    }
+                    else{
+                        convertTextToSpeech();
+                    }
+                }
+                else
+                    Log.e(TAG, "Initilization Failed!");
+            }
+        });
+
         Button speak = findViewById(R.id.speak);
         speak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText text = findViewById(R.id.text);
+                /*EditText text = findViewById(R.id.text);
+
                 Speakerbox speakerbox = new Speakerbox(getApplication());
-                speakerbox.play(text.getText().toString());
+                speakerbox.play(text.getText().toString());*/
+
+                convertTextToSpeech();
             }
         });
 
@@ -43,6 +69,29 @@ public class HomeActivity extends AppCompatActivity {
                 new RecordLocation().execute(userLocation.getLatitude()+"", userLocation.getLongitude()+"", name.getText().toString(), desc.getText().toString());
             }
         });*/
+    }
+
+    @Override
+    protected void onPause() {
+
+        if(tts != null){
+
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onPause();
+    }
+
+    private void convertTextToSpeech() {
+        TextView et = findViewById(R.id.text);
+
+        String text = et.getText().toString();
+        text = "J'espère que tu as eu mon email";
+        if(!text.isEmpty())
+            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+        else{
+            Log.d(TAG, "Content not available");
+        }
     }
 
     /*void getLocation()
