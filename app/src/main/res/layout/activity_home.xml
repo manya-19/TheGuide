@@ -7,33 +7,22 @@
     tools:context=".HomeActivity">
 
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="61dp"
         android:ems="10"
-        android:hint="Name"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="159dp"
-        android:ems="10"
-        android:hint="Description"
+        android:hint="Text"
         android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/save"
+        android:id="@+id/speak"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="202dp"
-        android:text="Save" />
+        android:text="Speak" />
 </RelativeLayout>
