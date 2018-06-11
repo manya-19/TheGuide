@@ -15,7 +15,8 @@
         android:layout_marginTop="61dp"
         android:ems="10"
         android:hint="Text"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/speak"
