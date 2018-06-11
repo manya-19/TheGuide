@@ -1,12 +1,15 @@
 package flint.durzo.theguide;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -50,6 +53,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        TextView reg = findViewById(R.id.register);
+        reg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(HomeActivity.this,RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
         /*tts=new TextToSpeech(this, new TextToSpeech.OnInitListener() {
 
             @Override
@@ -122,7 +133,17 @@ public class HomeActivity extends AppCompatActivity {
             HttpURLConnection urlConnection = null;
             try
             {
-                url = new URL(baseUrl+"login.php?user="+strings[0]+"&pass="+strings[1] );
+                String myURL = baseUrl+"submitfeedback.php?username="+strings[0]+"&taskid="+strings[1]+"&feedback="+ Uri.encode(strings[2])+"&query="+strings[3];
+                myURL = myURL.replaceAll(" ", "%20");
+                myURL = myURL.replaceAll("\'", "%27");
+                myURL = myURL.replaceAll("\'", "%22");
+                myURL = myURL.replaceAll("\\(", "%28");
+                myURL = myURL.replaceAll("\\)", "%29");
+                myURL = myURL.replaceAll("\\{", "%7B");
+                myURL = myURL.replaceAll("\\}", "%7B");
+                myURL = myURL.replaceAll("\\]", "%22");
+                myURL = myURL.replaceAll("\\[", "%22");
+                url = new URL(myURL);
                 urlConnection = (HttpURLConnection) url.openConnection();
                 BufferedReader br=new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 String data;
