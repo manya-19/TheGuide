@@ -123,7 +123,10 @@ public class LoginActivity extends AppCompatActivity {
             if(!webPage.equals( "success" ))
                 Toast.makeText( LoginActivity.this, "Email/password is incorrect", Toast.LENGTH_SHORT ).show();
             else
+            {
                 Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, SampleActivity.class));
+            }
         }
 
         @Override
