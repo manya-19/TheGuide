@@ -2,7 +2,6 @@ package flint.durzo.theguide;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +17,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class HomeActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     String TAG = "Abhinav";
 
@@ -28,7 +27,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_login);
 
         final EditText emailET = findViewById(R.id.email);
         final EditText passET = findViewById(R.id.password);
@@ -40,12 +39,12 @@ public class HomeActivity extends AppCompatActivity {
                 String password = passET.getText().toString();
                 boolean check = true;
                 int emid=email.indexOf( '@' );
-                int dotid=email.indexOf('.');
+                int dotid=email.lastIndexOf('.');
                 if(emid==-1 || dotid==-1) check =false;
                 if(dotid-emid<1) check =false;
                 if(dotid==email.length()-1) check =false;
                 if(!check)
-                    Toast.makeText( HomeActivity.this, "Invalid Email ", Toast.LENGTH_SHORT ).show();
+                    Toast.makeText( LoginActivity.this, "Invalid Email ", Toast.LENGTH_SHORT ).show();
                 else
                 {
                     new Login().execute(email, password);
@@ -57,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(HomeActivity.this,RegisterActivity.class);
+                Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -114,7 +113,7 @@ public class HomeActivity extends AppCompatActivity {
         protected void onPreExecute() {
 
             super.onPreExecute();
-            proc=ProgressDialog.show(HomeActivity.this,"Please Wait","Logging in...");
+            proc=ProgressDialog.show(LoginActivity.this,"Please Wait","Logging in...");
         }
 
         @Override
@@ -122,9 +121,9 @@ public class HomeActivity extends AppCompatActivity {
             proc.dismiss();
             super.onPostExecute( aVoid );
             if(!webPage.equals( "success" ))
-                Toast.makeText( HomeActivity.this, "email/password is incorrect", Toast.LENGTH_SHORT ).show();
+                Toast.makeText( LoginActivity.this, "Email/password is incorrect", Toast.LENGTH_SHORT ).show();
             else
-                Toast.makeText(HomeActivity.this, "Ho gaya", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -133,7 +132,7 @@ public class HomeActivity extends AppCompatActivity {
             HttpURLConnection urlConnection = null;
             try
             {
-                String myURL = baseUrl+"submitfeedback.php?username="+strings[0]+"&taskid="+strings[1]+"&feedback="+ Uri.encode(strings[2])+"&query="+strings[3];
+                String myURL = baseUrl+"login.php?user="+strings[0]+"&pass="+strings[1];
                 myURL = myURL.replaceAll(" ", "%20");
                 myURL = myURL.replaceAll("\'", "%27");
                 myURL = myURL.replaceAll("\'", "%22");
