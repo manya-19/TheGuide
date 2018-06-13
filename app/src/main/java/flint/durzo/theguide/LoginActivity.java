@@ -117,19 +117,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            proc.dismiss();
-            super.onPostExecute( aVoid );
-            if(!webPage.equals( "success" ))
-                Toast.makeText( LoginActivity.this, "Email/password is incorrect", Toast.LENGTH_SHORT ).show();
-            else
-            {
-                Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LoginActivity.this, SampleActivity.class));
-            }
-        }
-
-        @Override
         protected Void doInBackground(String... strings) {
             URL url;
             HttpURLConnection urlConnection = null;
@@ -162,6 +149,19 @@ public class LoginActivity extends AppCompatActivity {
                     urlConnection.disconnect();
             }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            proc.dismiss();
+            super.onPostExecute( aVoid );
+            if(!webPage.equals( "success" ))
+                Toast.makeText( LoginActivity.this, "Email/password is incorrect", Toast.LENGTH_SHORT ).show();
+            else
+            {
+                Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            }
         }
     }
 }
