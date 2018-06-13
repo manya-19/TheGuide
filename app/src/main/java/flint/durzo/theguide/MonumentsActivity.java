@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -23,7 +25,15 @@ public class MonumentsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_monuments);
         Intent intent = getIntent();
         city = intent.getStringExtra("id");
-        new GetMonuments().execute(city);
+        //new GetMonuments().execute(city);
+        //List<Info> data = fill_with_data();
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        Recycler_View_Adapter adapter = new Recycler_View_Adapter(null, getApplication());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
     }
 
     class GetMonuments extends AsyncTask<String, Void, Void> {
