@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -15,9 +14,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MonumentsActivity extends AppCompatActivity {
+    RecyclerView recyclerView;
+    Recycler_View_Adapter1 adapter;
     String city;
+    List<Info> info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +29,8 @@ public class MonumentsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_monuments);
         Intent intent = getIntent();
         city = intent.getStringExtra("id");
-        //new GetMonuments().execute(city);
-        //List<Info> data = fill_with_data();
-
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        Recycler_View_Adapter adapter = new Recycler_View_Adapter(null, getApplication());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
+        info = new ArrayList<>();
+        new GetMonuments().execute(city);
     }
 
     class GetMonuments extends AsyncTask<String, Void, Void> {
@@ -95,11 +92,13 @@ public class MonumentsActivity extends AppCompatActivity {
                     brI = webPage.indexOf("<br>");
                     String imageURL = webPage.substring(0, brI);
                     webPage = webPage.substring(brI+4);
-                    Log.d("Abhinav", name);
-
-
+                    info.add(new Info(name, "Something", imageURL));
                 }
             }
+            recyclerView = findViewById(R.id.recyclerview);
+            adapter = new Recycler_View_Adapter1(info, getApplication());
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(MonumentsActivity.this));
         }
     }
 }
