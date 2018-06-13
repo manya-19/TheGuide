@@ -122,9 +122,12 @@ public class LoginActivity extends AppCompatActivity {
             super.onPostExecute( aVoid );
             if(!webPage.equals( "success" ))
                 Toast.makeText( LoginActivity.this, "Email/password is incorrect", Toast.LENGTH_SHORT ).show();
-            else
+            else{
                 Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
-        }
+            Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
+            startActivity( intent );
+
+        }}
 
         @Override
         protected Void doInBackground(String... strings) {
