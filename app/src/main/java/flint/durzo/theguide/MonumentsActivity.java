@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -90,15 +91,28 @@ public class MonumentsActivity extends AppCompatActivity {
                     String name = webPage.substring(0, brI);
                     webPage = webPage.substring(brI+4);
                     brI = webPage.indexOf("<br>");
+                    String address = webPage.substring(0, brI);
+                    webPage = webPage.substring(brI+4);
+                    brI = webPage.indexOf("<br>");
                     String imageURL = webPage.substring(0, brI);
                     webPage = webPage.substring(brI+4);
-                    info.add(new Info(name, "Something", imageURL));
+                    info.add(new Info(name, address, imageURL));
                 }
             }
             recyclerView = findViewById(R.id.recyclerview);
             adapter = new Recycler_View_Adapter1(info, getApplication());
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(MonumentsActivity.this));
+            recyclerView.addOnItemTouchListener(new CustomRVItemTouchListener(MonumentsActivity.this, recyclerView, new RecyclerViewItemClickListener() {
+                @Override
+                public void onClick(View view, int position) {
+                }
+
+                @Override
+                public void onLongClick(View view, int position) {
+
+                }
+            }));
         }
     }
 }
