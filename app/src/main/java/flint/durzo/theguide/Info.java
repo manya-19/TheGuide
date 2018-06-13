@@ -10,6 +10,4 @@ public class Info {
         this.description = description;
         this.imageurl = image;
     }
-
-
 }
