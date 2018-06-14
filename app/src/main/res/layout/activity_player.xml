@@ -38,7 +38,7 @@ android:layout_above="@+id/linearlayout"
             android:textColor="@android:color/black" />
 
         <ImageButton
-            android:id="@+id/button"
+            android:id="@+id/speak"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
