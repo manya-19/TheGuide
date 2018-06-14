@@ -2,11 +2,13 @@ package flint.durzo.theguide;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +21,7 @@ import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
 
+    boolean savelogin;
     String TAG = "Abhinav";
 
     //TextToSpeech tts;
@@ -31,6 +34,18 @@ public class LoginActivity extends AppCompatActivity {
 
         final EditText emailET = findViewById(R.id.email);
         final EditText passET = findViewById(R.id.password);
+        final CheckBox rememberpasswordbox = findViewById(R.id.checkBox);
+
+        SharedPreferences loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        final SharedPreferences.Editor loginPrefsEditor = loginPreferences.edit();
+        savelogin = loginPreferences.getBoolean("savelogin", false);
+        if(savelogin)
+        {
+            emailET.setText(loginPreferences.getString("id",""));
+            passET.setText(loginPreferences.getString("password",""));
+            rememberpasswordbox.setChecked(true);
+        }
+
         Button login = findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +62,15 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText( LoginActivity.this, "Invalid Email ", Toast.LENGTH_SHORT ).show();
                 else
                 {
+                    if (rememberpasswordbox.isChecked()) {
+                        loginPrefsEditor.putBoolean("savelogin", true);
+                        loginPrefsEditor.putString("id", email);
+                        loginPrefsEditor.putString("password", password);
+                        loginPrefsEditor.apply();
+                    } else {
+                        loginPrefsEditor.clear();
+                        loginPrefsEditor.commit();
+                    }
                     new Login().execute(email, password);
                 }
             }
