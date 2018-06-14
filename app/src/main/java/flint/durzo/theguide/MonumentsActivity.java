@@ -23,6 +23,7 @@ public class MonumentsActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     Recycler_View_Adapter1 adapter;
     String city;
+    ArrayList<String> monumentsOfCity;
     List<Info> info;
 
     @Override
@@ -34,6 +35,7 @@ public class MonumentsActivity extends AppCompatActivity {
         city = intent.getStringExtra("id");
         setTitle(city);
         info = new ArrayList<>();
+        monumentsOfCity = new ArrayList<>();
         new GetMonuments().execute(city);
     }
 
@@ -94,12 +96,13 @@ public class MonumentsActivity extends AppCompatActivity {
                     String name = webPage.substring(0, brI);
                     webPage = webPage.substring(brI+4);
                     brI = webPage.indexOf("<br>");
-                    String address = webPage.substring(0, brI);
+                    String desc = webPage.substring(0, brI);
                     webPage = webPage.substring(brI+4);
                     brI = webPage.indexOf("<br>");
                     String imageURL = webPage.substring(0, brI);
                     webPage = webPage.substring(brI+4);
-                    info.add(new Info(name, address, imageURL));
+                    monumentsOfCity.add(name+" "+desc);
+                    info.add(new Info(name, desc, imageURL));
                 }
             }
             recyclerView = findViewById(R.id.recyclerview);
@@ -109,6 +112,9 @@ public class MonumentsActivity extends AppCompatActivity {
             recyclerView.addOnItemTouchListener(new CustomRVItemTouchListener(MonumentsActivity.this, recyclerView, new RecyclerViewItemClickListener() {
                 @Override
                 public void onClick(View view, int position) {
+                    Intent intent = new Intent(MonumentsActivity.this, PlayerActivity.class);
+                    intent.putExtra("monument", monumentsOfCity.get(position));
+                    startActivity(intent);
                 }
 
                 @Override
