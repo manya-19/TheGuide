@@ -46,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
 
         List<Data> data = new ArrayList<>();
 
-        data.add(new Data("Lucknow", "City of Nawabs", R.drawable.lucknow));
+        data.add(new Data("Lucknow", "City of Nawabs", R.drawable.lko));
         data.add(new Data("X-Men: Apocalypse", "X-Men: Apocalypse is an upcoming American superhero film based on the X-Men characters that appear in Marvel Comics ", R.drawable.ic_launcher_background));
         data.add(new Data("Captain America: Civil War", "A feud between Captain America and Iron Man leaves the Avengers in turmoil.  ", R.drawable.ic_launcher_background));
         data.add(new Data("Kung Fu Panda 3", "After reuniting with his long-lost father, Po  must train a village of pandas", R.drawable.ic_launcher_background));
