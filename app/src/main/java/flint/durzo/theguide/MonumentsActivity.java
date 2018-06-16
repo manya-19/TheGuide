@@ -19,6 +19,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import flint.durzo.theguide.Adapters.CustomRVItemTouchListener;
+import flint.durzo.theguide.Adapters.Info;
+import flint.durzo.theguide.Adapters.RecyclerViewItemClickListener;
+import flint.durzo.theguide.Adapters.Recycler_View_Adapter1;
+
 public class MonumentsActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     Recycler_View_Adapter1 adapter;

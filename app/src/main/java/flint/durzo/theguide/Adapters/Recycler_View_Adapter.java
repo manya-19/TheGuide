@@ -1,4 +1,4 @@
-package flint.durzo.theguide;
+package flint.durzo.theguide.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,13 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.Collections;
 import java.util.List;
+
+import flint.durzo.theguide.R;
 
 public class Recycler_View_Adapter extends RecyclerView.Adapter<View_Holder> {
 
-    List<Data> list = Collections.emptyList();
-    Context context;
+    private List<Data> list;
+    private Context context;
 
     public Recycler_View_Adapter(List<Data> list, Context context) {
         this.list = list;
