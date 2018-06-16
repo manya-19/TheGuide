@@ -1,5 +1,8 @@
 package flint.durzo.theguide;
 
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -21,8 +24,7 @@ import java.util.Locale;
 
 public class PlayerActivity extends AppCompatActivity {
     TextToSpeech tts;
-    File destinationFile;
-    ArrayList<String> fileURI;
+    ArrayList<Uri> fileURI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,16 @@ public class PlayerActivity extends AppCompatActivity {
                         }
                         @Override
                         public void onDone(String utteranceId) {
+
+                            MediaPlayer mediaPlayer = new MediaPlayer();
+                            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                            try {
+                                mediaPlayer.setDataSource(getApplicationContext(), fileURI.get(0));
+                                mediaPlayer.prepare();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            mediaPlayer.start();
                         }
                         @Override
                         public void onError(String utteranceId) {
@@ -78,8 +90,8 @@ public class PlayerActivity extends AppCompatActivity {
         Bundle params = new Bundle();
         params.putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, title);
         File location = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
-        destinationFile = new File(location,title+".wav");
-        fileURI.add(destinationFile.getAbsolutePath());
+        File destinationFile = new File(location,title+".wav");
+        fileURI.add(Uri.parse(destinationFile.getAbsolutePath()));
         if (type.equals("Instruction"))
             tts.setPitch(0.75f);
         else
