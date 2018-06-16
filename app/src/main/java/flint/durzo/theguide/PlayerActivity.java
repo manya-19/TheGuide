@@ -9,9 +9,9 @@ import android.os.Environment;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -27,14 +27,17 @@ public class PlayerActivity extends AppCompatActivity {
     TextToSpeech tts;
     ImageButton speak;
     ArrayList<Uri> fileURI;
+    ArrayList<String> titles;
+    TextView text;
     MediaPlayer mediaPlayer;
     int c = 0;
     boolean filesReady = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_player );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_player);
+        text = findViewById(R.id.title);
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -55,6 +58,7 @@ public class PlayerActivity extends AppCompatActivity {
                     finish();
             }
         });
+        titles = new ArrayList<>();
         fileURI = new ArrayList<>();
         tts = new TextToSpeech( this, new TextToSpeech.OnInitListener() {
             @Override
@@ -96,14 +100,15 @@ public class PlayerActivity extends AppCompatActivity {
                 {
                     playNext(c);
                     c++;
+                    speak.setImageResource(R.mipmap.pause);
                 }
                 else {
                     if (mediaPlayer.isPlaying()) {
-                        Log.d("Abhinav", "I am here3");
                         mediaPlayer.pause();
+                        speak.setImageResource(R.mipmap.play);
                     } else {
-                        Log.d("Abhinav", "I am here4");
                         mediaPlayer.start();
+                        speak.setImageResource(R.mipmap.pause);
                     }
                 }
             }
@@ -114,6 +119,7 @@ public class PlayerActivity extends AppCompatActivity {
         try {
             mediaPlayer.stop();
             mediaPlayer.reset();
+            text.setText(titles.get(c));
             mediaPlayer.setDataSource(getApplicationContext(), fileURI.get(c));
             mediaPlayer.prepare();
         } catch (IOException e) {
@@ -136,6 +142,7 @@ public class PlayerActivity extends AppCompatActivity {
         File location = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
         File destinationFile = new File(location,title+".wav");
         fileURI.add(Uri.parse(destinationFile.getAbsolutePath()));
+        titles.add(title);
         if (type.equals("Instruction"))
             tts.setPitch(0.75f);
         else
