@@ -6,7 +6,6 @@ import android.os.Environment;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -17,16 +16,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class PlayerActivity extends AppCompatActivity {
     TextToSpeech tts;
     File destinationFile;
+    ArrayList<String> fileURI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_player );
+        fileURI = new ArrayList<>();
         tts = new TextToSpeech( this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -75,23 +77,16 @@ public class PlayerActivity extends AppCompatActivity {
     private void convertTextToSpeech(String type, String title, String text) {
         Bundle params = new Bundle();
         params.putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, title);
-
         File location = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
-
         destinationFile = new File(location,title+".wav");
-
-        Log.d("Abhinav", destinationFile.getAbsolutePath());
-
+        fileURI.add(destinationFile.getAbsolutePath());
         if (type.equals("Instruction"))
             tts.setPitch(0.75f);
         else
             tts.setPitch(1.25f);
-
-        int sr = 0;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            sr = tts.synthesizeToFile(text, params, destinationFile, title);
-        }
-        Log.d("Abhinav", "synthesize returns = " + sr);
+        int result = tts.synthesizeToFile(text, params, destinationFile, title);
+        if (result == TextToSpeech.ERROR)
+            Toast.makeText(this, "Initialisation Failed", Toast.LENGTH_SHORT).show();
     }
 
     class FetchTextToSpeak extends AsyncTask<String, Void, Void> {
