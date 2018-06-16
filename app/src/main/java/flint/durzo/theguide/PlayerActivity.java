@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -24,12 +25,36 @@ import java.util.Locale;
 
 public class PlayerActivity extends AppCompatActivity {
     TextToSpeech tts;
+    ImageButton speak;
     ArrayList<Uri> fileURI;
+    MediaPlayer mediaPlayer;
+    int c = 0;
+    boolean filesReady = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_player );
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mediaPlayer.start();
+            }
+        });
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                if (c < fileURI.size())
+                {
+                    playNext(c);
+                    c++;
+                }
+                else
+                    finish();
+            }
+        });
         fileURI = new ArrayList<>();
         tts = new TextToSpeech( this, new TextToSpeech.OnInitListener() {
             @Override
@@ -43,20 +68,13 @@ public class PlayerActivity extends AppCompatActivity {
                     new FetchTextToSpeak().execute("1");
                     tts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
                         @Override
-                        public void onStart(String utteranceId) {;
+                        public void onStart(String utteranceId) {
                         }
                         @Override
                         public void onDone(String utteranceId) {
-
-                            MediaPlayer mediaPlayer = new MediaPlayer();
-                            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                            try {
-                                mediaPlayer.setDataSource(getApplicationContext(), fileURI.get(0));
-                                mediaPlayer.prepare();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            mediaPlayer.start();
+                            speak.setEnabled(true);
+                            speak.setClickable(true);
+                            filesReady = true;
                         }
                         @Override
                         public void onError(String utteranceId) {
@@ -68,13 +86,39 @@ public class PlayerActivity extends AppCompatActivity {
                     Toast.makeText(PlayerActivity.this, "Speech Initialisation Failed", Toast.LENGTH_SHORT).show();
             }
         } );
-        ImageButton speak = findViewById( R.id.speak );
+        speak = findViewById(R.id.speak);
+        speak.setEnabled(false);
+        speak.setClickable(false);
         speak.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //convertTextToSpeech("1", "Sample Title", "Hello");
+                if (c == 0 && !mediaPlayer.isPlaying())
+                {
+                    playNext(c);
+                    c++;
+                }
+                else {
+                    if (mediaPlayer.isPlaying()) {
+                        Log.d("Abhinav", "I am here3");
+                        mediaPlayer.pause();
+                    } else {
+                        Log.d("Abhinav", "I am here4");
+                        mediaPlayer.start();
+                    }
+                }
             }
         } );
+    }
+
+    void playNext(int c){
+        try {
+            mediaPlayer.stop();
+            mediaPlayer.reset();
+            mediaPlayer.setDataSource(getApplicationContext(), fileURI.get(c));
+            mediaPlayer.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
