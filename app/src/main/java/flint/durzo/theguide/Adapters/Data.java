@@ -1,4 +1,4 @@
-package flint.durzo.theguide;
+package flint.durzo.theguide.Adapters;
 
 public class Data {
     public String title;

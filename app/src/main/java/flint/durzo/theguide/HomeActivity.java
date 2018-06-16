@@ -10,6 +10,11 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import flint.durzo.theguide.Adapters.CustomRVItemTouchListener;
+import flint.durzo.theguide.Adapters.Data;
+import flint.durzo.theguide.Adapters.RecyclerViewItemClickListener;
+import flint.durzo.theguide.Adapters.Recycler_View_Adapter;
+
 public class HomeActivity extends AppCompatActivity {
 
     @Override

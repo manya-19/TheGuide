@@ -19,7 +19,6 @@ import java.util.Locale;
 
 public class PlayerActivity extends AppCompatActivity {
     TextToSpeech tts;
-    String TAG = "manya";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +72,6 @@ public class PlayerActivity extends AppCompatActivity {
     private void convertTextToSpeech(String type, String title, String text) {
         HashMap<String, String> map = new HashMap<>();
         map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, type);
-
 
         /*if (id.equals("1"))
             tts.setPitch(0.1f);
