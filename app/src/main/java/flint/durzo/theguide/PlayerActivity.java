@@ -2,23 +2,26 @@ package flint.durzo.theguide;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Locale;
 
 public class PlayerActivity extends AppCompatActivity {
     TextToSpeech tts;
+    File destinationFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +39,14 @@ public class PlayerActivity extends AppCompatActivity {
                     new FetchTextToSpeak().execute("1");
                     tts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
                         @Override
-                        public void onStart(String utteranceId) {
+                        public void onStart(String utteranceId) {;
                         }
                         @Override
                         public void onDone(String utteranceId) {
                         }
                         @Override
                         public void onError(String utteranceId) {
-                            Toast.makeText(PlayerActivity.this, "Some error occured while speaking", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PlayerActivity.this, "Some Error Occurred in TTS File", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -70,19 +73,25 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
     private void convertTextToSpeech(String type, String title, String text) {
-        HashMap<String, String> map = new HashMap<>();
-        map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, type);
+        Bundle params = new Bundle();
+        params.putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, title);
 
-        /*if (id.equals("1"))
-            tts.setPitch(0.1f);
+        File location = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
+
+        destinationFile = new File(location,title+".wav");
+
+        Log.d("Abhinav", destinationFile.getAbsolutePath());
+
+        if (type.equals("Instruction"))
+            tts.setPitch(0.75f);
         else
-            tts.setPitch(0.9f);*/
+            tts.setPitch(1.25f);
 
-        if (!text.isEmpty())
-            tts.speak( text, TextToSpeech.QUEUE_ADD, map);
-        else {
-            Toast.makeText(this, "Content not available", Toast.LENGTH_SHORT).show();
+        int sr = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            sr = tts.synthesizeToFile(text, params, destinationFile, title);
         }
+        Log.d("Abhinav", "synthesize returns = " + sr);
     }
 
     class FetchTextToSpeak extends AsyncTask<String, Void, Void> {
