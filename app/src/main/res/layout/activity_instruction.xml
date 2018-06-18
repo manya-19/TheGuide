@@ -5,11 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InstructionActivity"
-    android:padding="16dp"
-
-    >
+    android:padding="16dp">
 
     <LinearLayout
+        android:id="@+id/linearlayout"
         android:layout_width="match_parent"
         android:layout_height="370dp"
         android:layout_alignParentStart="true"
@@ -33,42 +32,57 @@ Moved creeping great from. Third bearing have open tree face his great. Seas air
             tools:textColor="@android:color/black" />
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="33dp"
-        android:layout_marginEnd="73dp"
-        app:srcCompat="@mipmap/play" />
+    <LinearLayout
+        android:layout_below="@+id/linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignBottom="@+id/imageButton"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="40dp"
-        app:srcCompat="@android:drawable/ic_btn_speak_now" />
+        <LinearLayout
+            android:padding="8dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageButton2"
-        android:layout_below="@+id/imageButton"
-        android:layout_marginTop="-33dp"
-        android:text="Click to listen"
-        tools:textColor="@android:color/black" />
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/screen_background_light_transparent"
+                app:srcCompat="@mipmap/play" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageButton"
-        android:layout_below="@+id/imageButton"
-        android:layout_marginTop="-33dp"
-        android:text="Click to go forward"
-        tools:textColor="@android:color/black" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Listen"
+                tools:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/screen_background_light_transparent"
+                app:srcCompat="@mipmap/ic_skip" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Skip"
+                tools:textColor="@android:color/black" />
+        </LinearLayout>
+    </LinearLayout>
+
 </RelativeLayout>
