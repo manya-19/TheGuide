@@ -26,7 +26,7 @@ import java.util.Locale;
 
 public class PlayerActivity extends AppCompatActivity {
     TextToSpeech tts;
-    ImageButton speak;
+    ImageButton speak,camera;
     ArrayList<Uri> fileURI;
     ArrayList<String> titles;
     TextView text;
@@ -44,6 +44,15 @@ public class PlayerActivity extends AppCompatActivity {
         title = intent.getStringExtra("title");
         setTitle(title);
         text = findViewById(R.id.title);
+        camera=findViewById( R.id.imageButton3 );
+        camera.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                startActivityForResult(intent, 0);
+
+            }
+        } );
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
