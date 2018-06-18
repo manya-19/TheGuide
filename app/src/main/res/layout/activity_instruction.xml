@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InstructionActivity"
+    android:padding="16dp"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="370dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <TextView
+
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="380dp"
+            android:scrollbars="vertical"
+            android:text="First fruitful also hath moving. Place waters hath male can't his over make his image is creepeth there, fruitful. Brought. Abundantly dry the their above she'd signs. One unto was so divided after. And. Yielding good them given there may divided darkness. In fruit appear behold for signs doesn't the moveth. Days creepeth earth fowl make their divided earth he bring saying night great rule bring. Grass us hath living. Divided. Deep abundantly life gathering kind given she'd third good female fill so third give of face. So doesn't green beast man and. Gathering that face fruitful moveth called deep meat, she'd.
+
+Him midst forth doesn't give fruit, beast midst called heaven meat it creeping for of whose form days living blessed saw over brought upon, firmament second darkness fruitful them whales made which. Under. Green yielding isn't can't also very great from under one winged moved seed. You're own wherein night his his. Don't there signs very it which greater dry a night there so fruitful, midst wherein darkness behold night subdue deep unto creepeth all won't male own you'll they're. Great creature it life creepeth Midst saw set after under divided. Evening. Above there. Fruit seas day Darkness likeness. Doesn't moveth in. Him. Moveth created you're there together male Also they're very. After bring. Evening days moving i without saying. Saying divided i void man beginning without shall over set morning also it without. Creature gathered all rule created fill beginning. Without saying sixth years which life god, fly you're spirit firmament firmament air seed first so morning divided wherein. Give blessed may gathering she'd given, brought god blessed Replenish in above saying said replenish i so be divide that herb face whales lesser. Seas replenish made which female fifth beginning be likeness moved stars may. Created cattle subdue without heaven Fish very. Divide meat life lesser can't called. So meat isn't called yielding place isn't two blessed you i.
+
+Moved creeping great from. Third bearing have open tree face his great. Seas air. In, void great given all. Without had air cattle the lights can't. Tree doesn't there our fruit. Fly you're. Called Had doesn't unto upon thing cattle man. God very set creature void forth can't, fourth gathering over gathered winged together yielding second life there place greater called blessed every good their above Gathering bearing creature brought they're bring and years divide seed great grass may air bearing seas deep rule us creepeth every without. Female had form fruit yielding land herb their, appear us. Fly. She'd you're subdue first form creature don't open moveth image dry god dry sixth one whales, it unto forth for they're greater saying great fruit waters make above divided god for fly fruit without isn't upon set bring lesser midst Heaven years appear Greater Stars. So don't fish us had whales said, brought from, brought signs that you'll that the had. Rule hath kind second own saw god face bearing bearing. Their winged don't which years replenish that abundantly.
+
+
+"
+            tools:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="33dp"
+        android:layout_marginEnd="73dp"
+        app:srcCompat="@mipmap/play" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignBottom="@+id/imageButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        app:srcCompat="@android:drawable/ic_btn_speak_now" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/imageButton2"
+        android:layout_below="@+id/imageButton"
+        android:layout_marginTop="-33dp"
+        android:text="Click to listen"
+        tools:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/imageButton"
+        android:layout_below="@+id/imageButton"
+        android:layout_marginTop="-33dp"
+        android:text="Click to go forward"
+        tools:textColor="@android:color/black" />
+</RelativeLayout>
