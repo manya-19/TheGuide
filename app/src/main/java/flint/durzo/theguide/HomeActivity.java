@@ -36,8 +36,9 @@ public class HomeActivity extends AppCompatActivity {
                     case 0: city = "Lucknow";
                     break;
                 }
-                Intent intent = new Intent(HomeActivity.this, MonumentsActivity.class);
-                intent.putExtra("id", city);
+                Intent intent = new Intent(HomeActivity.this, PlayerActivity.class);
+                intent.putExtra("source", "Home");
+                intent.putExtra("title", city);
                 startActivity(intent);
             }
 

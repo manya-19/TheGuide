@@ -106,7 +106,7 @@ public class MonumentsActivity extends AppCompatActivity {
                     brI = webPage.indexOf("<br>");
                     String imageURL = webPage.substring(0, brI);
                     webPage = webPage.substring(brI+4);
-                    monumentsOfCity.add(name+" "+desc);
+                    monumentsOfCity.add(name);
                     info.add(new Info(name, desc, imageURL));
                 }
             }
@@ -118,7 +118,8 @@ public class MonumentsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view, int position) {
                     Intent intent = new Intent(MonumentsActivity.this, PlayerActivity.class);
-                    intent.putExtra("monument", monumentsOfCity.get(position));
+                    intent.putExtra("source", "Monuments");
+                    intent.putExtra("title", monumentsOfCity.get(position));
                     startActivity(intent);
                 }
 
