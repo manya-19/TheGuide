@@ -25,7 +25,8 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Email"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:textColorLink="@android:color/black" />
 
     <EditText
         android:id="@+id/password"
@@ -36,7 +37,8 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textColorLink="@android:color/black" />
 
     <CheckBox
         android:id="@+id/checkBox"
@@ -45,16 +47,21 @@
         android:layout_below="@+id/password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="Remember Me" />
+        android:text="Remember Me"
+        android:textColorLink="@android:color/black" />
 
     <Button
         android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:background="@android:color/black"
+        android:layout_width="368dp"
+        android:layout_height="37dp"
         android:layout_below="@+id/checkBox"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="Login" />
+        android:text="Login"
+        android:textColor="@android:color/white"
+        android:textColorLink="@android:color/black" />
 
     <TextView
         android:id="@+id/forgot"
@@ -62,7 +69,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:text="Forgot Password?" />
+        android:text="Forgot Password?"
+        android:textColorLink="@android:color/black" />
 
     <TextView
         android:id="@+id/register"
@@ -70,5 +78,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:text="Sign Up" />
+        android:text="Sign Up"
+        android:textColorLink="@android:color/black" />
 </RelativeLayout>
