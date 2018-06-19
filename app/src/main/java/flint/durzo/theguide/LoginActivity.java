@@ -29,6 +29,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        TextView forgot = findViewById(R.id.forgot);
+        forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+            }
+        });
+
         final EditText emailET = findViewById(R.id.email);
         final EditText passET = findViewById(R.id.password);
         final CheckBox rememberpasswordbox = findViewById(R.id.checkBox);
