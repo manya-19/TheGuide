@@ -29,7 +29,7 @@ public class PlayerActivity extends AppCompatActivity {
     ImageButton speak,camera;
     ArrayList<Uri> fileURI;
     ArrayList<String> titles;
-    TextView text;
+    TextView text;ImageButton skip;
     MediaPlayer mediaPlayer;
     int c = 0;
     boolean filesReady = false;
@@ -41,6 +41,20 @@ public class PlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_player);
         Intent intent = getIntent();
         source = intent.getStringExtra("source");
+        skip=findViewById( R.id.skip );
+        if(source.equals( "Monuments" ))
+            skip.setVisibility( View.GONE );
+        else
+        {
+            skip.setOnClickListener( new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(PlayerActivity.this, MonumentsActivity.class);
+                    intent.putExtra("id", title);
+                    startActivity(intent);
+                }
+            } );
+        }
         title = intent.getStringExtra("title");
         setTitle(title);
         text = findViewById(R.id.title);
