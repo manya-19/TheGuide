@@ -33,7 +33,7 @@ TextView txt;ImageButton b1;ImageButton btn;
                 }
             }
         });
-        btn.setOnClickListener( new View.OnClickListener() {
+        b1.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent( InstructionActivity.this,HomeActivity.class);
@@ -41,7 +41,7 @@ TextView txt;ImageButton b1;ImageButton btn;
             }
         } );
 
-        b1.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
