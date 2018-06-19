@@ -78,7 +78,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             progressDialog.dismiss();
             TextView response = findViewById(R.id.response);
             if (webPage.equals("success")) {
-                response.setText("Password sent to the Email ID. Please check your email. If you do not receive it in the next 30 minutes. Please try again.");
+                response.setText("Password sent to the Email ID. Please check your email." +
+                        " If you do not receive it in the next 30 minutes. Please try again." +
+                        " Please check your spam folder too.");
             } else
                 response.setText("Invalid Request");
         }
