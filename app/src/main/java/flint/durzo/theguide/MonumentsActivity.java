@@ -38,7 +38,7 @@ public class MonumentsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         city = intent.getStringExtra("id");
-        setTitle(city);
+        setTitle(city + " : Places of Interests");
         info = new ArrayList<>();
         monumentsOfCity = new ArrayList<>();
         new GetMonuments().execute(city);

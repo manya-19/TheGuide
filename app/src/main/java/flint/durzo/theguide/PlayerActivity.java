@@ -58,6 +58,7 @@ public class PlayerActivity extends AppCompatActivity {
         title = intent.getStringExtra("title");
         setTitle(title);
         text = findViewById(R.id.title);
+        text.setText(title);
         camera=findViewById( R.id.imageButton3 );
         camera.setOnClickListener( new View.OnClickListener() {
             @Override
