@@ -28,7 +28,8 @@
         <activity android:name=".MonumentsActivity" />
         <activity android:name=".PlayerActivity" />
         <activity android:name=".InstructionActivity" />
-        <activity android:name=".ForgotPasswordActivity"></activity>
+        <activity android:name=".ForgotPasswordActivity" />
+        <activity android:name=".VerifyEmailActivity"></activity>
     </application>
 
 </manifest>

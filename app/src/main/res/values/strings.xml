@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TheGuide</string>
+    <string name="app_name">GOT - Go to Tour</string>
     <string-array name="gender_array">
         <item>Male</item>
         <item>Female</item>
