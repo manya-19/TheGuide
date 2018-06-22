@@ -1,5 +1,6 @@
 package flint.durzo.theguide;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -107,7 +108,7 @@ public class PlayerActivity extends AppCompatActivity {
                         Toast.makeText(PlayerActivity.this, "Language not supported", Toast.LENGTH_SHORT).show();
                     }
                     if (source.equals("Monuments"))
-                        new FetchTextToSpeak().execute("1");
+                        new FetchID().execute(title);
                     else
                         new FetchCityTextToSpeak().execute(title);
                     tts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
@@ -263,6 +264,7 @@ public class PlayerActivity extends AppCompatActivity {
 
     class FetchCityTextToSpeak extends AsyncTask<String, Void, Void> {
         String webPage = "", baseUrl = "http://mobile.tornosindia.com/theguide/";
+
         //ProgressDialog progressDialog;
         @Override
         protected void onPreExecute() {
@@ -274,8 +276,7 @@ public class PlayerActivity extends AppCompatActivity {
         protected Void doInBackground(String... strings) {
             URL url;
             HttpURLConnection urlConnection = null;
-            try
-            {
+            try {
                 String myURL = baseUrl+"fetchcityinfobycityname.php?name="+strings[0];
                 myURL = myURL.replaceAll(" ", "%20");
                 myURL = myURL.replaceAll("\'", "%27");
@@ -292,13 +293,9 @@ public class PlayerActivity extends AppCompatActivity {
                 String data;
                 while ((data=br.readLine()) != null)
                     webPage=webPage+data;
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
-            }
-            finally
-            {
+            } finally {
                 if (urlConnection != null)
                     urlConnection.disconnect();
             }
@@ -311,15 +308,72 @@ public class PlayerActivity extends AppCompatActivity {
             //progressDialog.dismiss();
             if (webPage.isEmpty())
                 Toast.makeText(PlayerActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
-            else
-            {
-                while (webPage.contains("<br>")){
+            else {
+                while (webPage.contains("<br>")) {
                     int brI = webPage.indexOf("<br>");
                     String desc = webPage.substring(0, brI);
-                    webPage = webPage.substring(brI+4);
+                    webPage = webPage.substring(brI + 4);
 
                     convertTextToSpeech("City", title, desc);
                 }
+            }
+        }
+    }
+
+    class FetchID extends AsyncTask<String, Void, Void> {
+        String webPage = "", baseUrl = "http://mobile.tornosindia.com/theguide/";
+        ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(PlayerActivity.this, "Please Wait", "Fetching Data...");
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            URL url;
+            HttpURLConnection urlConnection = null;
+            try {
+                String myURL = baseUrl + "fetchidbymonumentname.php?name=" + strings[0];
+                myURL = myURL.replaceAll(" ", "%20");
+                myURL = myURL.replaceAll("\'", "%27");
+                myURL = myURL.replaceAll("\'", "%22");
+                myURL = myURL.replaceAll("\\(", "%28");
+                myURL = myURL.replaceAll("\\)", "%29");
+                myURL = myURL.replaceAll("\\{", "%7B");
+                myURL = myURL.replaceAll("\\}", "%7B");
+                myURL = myURL.replaceAll("\\]", "%22");
+                myURL = myURL.replaceAll("\\[", "%22");
+                url = new URL(myURL);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                String data;
+                while ((data = br.readLine()) != null)
+                    webPage = webPage + data;
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (urlConnection != null)
+                    urlConnection.disconnect();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            progressDialog.dismiss();
+            if (webPage.isEmpty())
+                Toast.makeText(PlayerActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
+            else {
+                String id = "";
+                while (webPage.contains("<br>")){
+                    int brI = webPage.indexOf("<br>");
+                    id = webPage.substring(0, brI);
+                    webPage = webPage.substring(brI+4);
+                }
+                new FetchTextToSpeak().execute(id);
             }
         }
     }
