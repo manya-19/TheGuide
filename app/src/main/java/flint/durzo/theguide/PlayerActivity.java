@@ -27,7 +27,7 @@ import java.util.Locale;
 
 public class PlayerActivity extends AppCompatActivity {
     TextToSpeech tts;
-    ImageButton speak,camera;
+    ImageButton speak, camera, next;
     ArrayList<Uri> fileURI;
     ArrayList<String> titles;
     TextView text, skip;
@@ -42,9 +42,12 @@ public class PlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_player);
         Intent intent = getIntent();
         source = intent.getStringExtra("source");
-        skip=findViewById( R.id.skip );
-        if(source.equals( "Monuments" ))
+        skip = findViewById(R.id.skip);
+        next = findViewById(R.id.next);
+        if(source.equals( "Monuments" )) {
             skip.setVisibility(View.INVISIBLE);
+            next.setVisibility(View.VISIBLE);
+        }
         else
         {
             skip.setOnClickListener( new View.OnClickListener() {
@@ -56,6 +59,16 @@ public class PlayerActivity extends AppCompatActivity {
                 }
             } );
         }
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (c < fileURI.size()) {
+                    playNext(c);
+                    c++;
+                } else
+                    finish();
+            }
+        });
         title = intent.getStringExtra("title");
         setTitle(title);
         text = findViewById(R.id.title);

@@ -12,7 +12,9 @@ import android.widget.TextView;
 import java.util.Locale;
 
 public class InstructionActivity extends AppCompatActivity {
-TextView txt;ImageButton b1;ImageButton btn;
+    TextView txt;
+    ImageButton b1;
+    ImageButton btn;
     TextToSpeech t1;int c=0;
 
     @Override

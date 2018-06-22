@@ -24,15 +24,11 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
-
-
         country = findViewById(R.id.country);
         password = findViewById(R.id.password);
         password2 = findViewById(R.id.password2);
-
         Button submit = findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,8 +43,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean checkNumber(EditText number){
-
-
         return true;
     }
 
