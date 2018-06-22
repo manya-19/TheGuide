@@ -1,6 +1,7 @@
 package flint.durzo.theguide;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -98,9 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public boolean isValidDate() {
-
-            return true;
-
+        return true;
     }
 
     class RegisterUser extends AsyncTask<String,Void, Void>{
@@ -123,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
                     break;
                 case "success":
                     Toast.makeText(RegisterActivity.this, "Registration Success", Toast.LENGTH_SHORT).show();
-                    finish();
+                    startActivity(new Intent(RegisterActivity.this, VerifyEmailActivity.class));
                     break;
                 default:
                     Toast.makeText(RegisterActivity.this, "Some Error Occurred", Toast.LENGTH_SHORT).show();
