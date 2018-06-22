@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -18,8 +17,8 @@ import java.net.URL;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText name, email, number, dob, address, country, password, password2;
-    Spinner gender;
+    EditText name, email, country, password, password2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +27,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
-        number = findViewById(R.id.number);
-        dob = findViewById(R.id.dob);
-        gender = findViewById(R.id.gender);
-        address = findViewById(R.id.address);
+
+
         country = findViewById(R.id.country);
         password = findViewById(R.id.password);
         password2 = findViewById(R.id.password2);
@@ -41,24 +38,17 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (formIsValid()){
-                    new RegisterUser().execute(name.getText().toString(), number.getText().toString(),
-                            password.getText().toString(), email.getText().toString(), address.getText().toString(),
-                            country.getText().toString(), gender.getSelectedItem().toString(), dob.getText().toString());
+                    new RegisterUser().execute(name.getText().toString(), "",
+                            password.getText().toString(), email.getText().toString(), "",
+                            country.getText().toString(), "","");
                 }
             }
         });
     }
 
     private boolean checkNumber(EditText number){
-        String num = number.getText().toString();
-        if (num.length()!=10){
-            Toast.makeText(this, "Enter a 10 digit phone number", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (!num.matches("[0-9]+")) {
-            Toast.makeText(this, "Invalid Number", Toast.LENGTH_SHORT).show();
-            return false;
-        }
+
+
         return true;
     }
 
@@ -98,56 +88,25 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (number.getText().toString().trim().isEmpty())
-        {
-            Toast.makeText(this, "Number cannot be empty", Toast.LENGTH_SHORT).show();
-            return false;
-        }
+
         if (!isValidDate())
         {
             Toast.makeText(this, "Invalid Date. Please use DD/MM/YYYY format", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (address.getText().toString().trim().isEmpty())
-        {
-            Toast.makeText(this, "Address cannot be empty", Toast.LENGTH_SHORT).show();
-            return false;
-        }
+
         if (country.getText().toString().trim().isEmpty())
         {
             Toast.makeText(this, "Country cannot be empty", Toast.LENGTH_SHORT).show();
             return false;
         }
-        return checkNumber(number);
+        return checkNumber(null);
     }
 
     public boolean isValidDate() {
-        String date = dob.getText().toString();
-        try
-        {
-            String day = date.substring(0,2);
-            if (day.length()!=2)
-                throw new Exception();
-            String month = date.substring(3,5);
-            if (month.length()!=2)
-                throw new Exception();
-            String year = date.substring(6);
-            if (year.length()!=4)
-                throw new Exception();
-            int dd = Integer.parseInt(day);
-            if (dd < 1 || dd > 31)
-                throw new Exception();
-            int mm = Integer.parseInt(month);
-            if (mm < 1 || mm > 12)
-                throw new Exception();
-            int yyyy = Integer.parseInt(year);
-            if (yyyy < 1950 || yyyy > 2100)
-                throw new Exception();
+
             return true;
-        }
-        catch(Exception e) {
-            return false;
-        }
+
     }
 
     class RegisterUser extends AsyncTask<String,Void, Void>{
