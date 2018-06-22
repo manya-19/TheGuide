@@ -3,11 +3,13 @@ package flint.durzo.theguide;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.speech.tts.UtteranceProgressListener;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -35,6 +37,22 @@ public class InstructionActivity extends AppCompatActivity {
                 }
             }
         });
+        t1.setOnUtteranceProgressListener(new UtteranceProgressListener() {
+            @Override
+            public void onStart(String utteranceId) {
+
+            }
+            @Override
+            public void onDone(String utteranceId) {
+                Intent intent=new Intent( InstructionActivity.this,HomeActivity.class);
+                startActivity(intent);
+
+            }
+            @Override
+            public void onError(String utteranceId) {
+                Toast.makeText(InstructionActivity.this, "Some Error Occurred in TTS File", Toast.LENGTH_SHORT).show();
+            }
+        });
         b1.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +66,7 @@ public class InstructionActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(c==0) {
-                    t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null,null);c++;
+                    t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null,"ins");c++;
                 }
                 else {
                     onPause();c=0;
