@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +36,19 @@ public class HomeActivity extends AppCompatActivity {
                 switch (position){
                     case 0: city = "Lucknow";
                     break;
+
+
                 }
-                Intent intent = new Intent(HomeActivity.this, PlayerActivity.class);
-                intent.putExtra("source", "Home");
-                intent.putExtra("title", city);
-                startActivity(intent);
+                if(position==0) {
+
+
+                    Intent intent = new Intent( HomeActivity.this, PlayerActivity.class );
+                    intent.putExtra( "source", "Home" );
+                    intent.putExtra( "title", city );
+                    startActivity( intent );
+                }
+                else
+                    Toast.makeText( HomeActivity.this, "Coming Soon!", Toast.LENGTH_SHORT ).show();
             }
 
             @Override
@@ -53,15 +62,13 @@ public class HomeActivity extends AppCompatActivity {
         List<Data> data = new ArrayList<>();
 
         data.add(new Data("Lucknow", "City of Nawabs", R.drawable.lko));
-        data.add(new Data("X-Men: Apocalypse", "X-Men: Apocalypse is an upcoming American superhero film based on the X-Men characters that appear in Marvel Comics ", R.drawable.ic_launcher_background));
-        data.add(new Data("Captain America: Civil War", "A feud between Captain America and Iron Man leaves the Avengers in turmoil.  ", R.drawable.ic_launcher_background));
-        data.add(new Data("Kung Fu Panda 3", "After reuniting with his long-lost father, Po  must train a village of pandas", R.drawable.ic_launcher_background));
-        data.add(new Data("Warcraft", "Fleeing their dying home to colonize another, fearsome orc warriors invade the peaceful realm of Azeroth. ", R.drawable.ic_launcher_background));
-        data.add(new Data("Alice in Wonderland", "Alice in Wonderland: Through the Looking Glass ", R.drawable.ic_launcher_background));
-        data.add(new Data("Batman vs Superman", "Following the destruction of Metropolis, Batman embarks on a personal vendetta against Superman ", R.drawable.ic_launcher_background));
-        data.add(new Data("X-Men: Apocalypse", "X-Men: Apocalypse is an upcoming American superhero film based on the X-Men characters that appear in Marvel Comics ", R.drawable.ic_launcher_background));
-        data.add(new Data("Captain America: Civil War", "A feud between Captain America and Iron Man leaves the Avengers in turmoil.  ", R.drawable.ic_launcher_background));
-        data.add(new Data("Kung Fu Panda 3", "After reuniting with his long-lost father, Po  must train a village of pandas", R.drawable.ic_launcher_background));
+        data.add(new Data("Agra", "Agra is a city in northern India’s Uttar Pradesh state. It's home to the iconic Taj Mahal, a mausoleum built for the Mughal ruler Shah Jahan’s wife, Mumtaz Mahal (who died in childbirth in 1631). ", R.drawable.ic_launcher_background));
+        data.add(new Data("Varanasi", "Varanasi is a city in the northern Indian state of Uttar Pradesh dating to the 11th century B.C. ", R.drawable.ic_launcher_background));
+        data.add(new Data("Allahabad", "Allahabad is a city in Uttar Pradesh state, north India. ", R.drawable.ic_launcher_background));
+        data.add(new Data("Delhi", "Delhi, India’s capital territory, is a massive metropolitan area in the country’s north ", R.drawable.ic_launcher_background));
+        data.add(new Data("Mumbai", "Mumbai (formerly called Bombay) is a densely populated city on India’s west coast. ", R.drawable.ic_launcher_background));
+        data.add(new Data("Srinagar", "Srinagar is the largest city and the summer capital of the Indian state of Jammu and Kashmir.  ", R.drawable.ic_launcher_background));
+
 
         return data;
     }
