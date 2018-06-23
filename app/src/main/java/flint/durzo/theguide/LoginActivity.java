@@ -146,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText( LoginActivity.this, "Email/password is incorrect", Toast.LENGTH_SHORT ).show();
             else
             {
-                Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT);
                 startActivity(new Intent(LoginActivity.this, InstructionActivity.class));
             }
         }

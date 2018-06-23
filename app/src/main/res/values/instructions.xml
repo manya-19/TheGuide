@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
    <string name="instructions">
-TheGuide application by Tornos assists you while traveling to various places or cities around India!\n
-It has various places in a city and hence provides you with variety of choices to influence your holiday trip!\n
-       To visit any place of interest,select any city.\n
-       To enable the Text to Speech feature ,press on the Play icon.\n
-       If you wish to pause the speech,press the play button again.\n
-       If you wish to skip the page,press on the skip button.\n
-       Press on the camera button if you wish to open the Camera application.\n
-       The text above the player would give you a brief about the place you are visiting.\n
-       We wish you a good experience while using our application.
+GOT:Go On Tour application by Tornos assists you while traveling to various places or cities around India!\nIt has various places in a city and hence provides you with variety of choices to influence your holiday trip!\nTo visit any place of interest,select any city.\nTo enable the Text to Speech feature ,press on the Play icon.\nIf you wish to pause the speech,press the play button again.\nIf you wish to skip the current speech,press on the skip button.\nPress on the camera button if you wish to open the camera application.\nThe text above the player would give you a brief about the place you are visiting.\nWe wish you a good experience while using our application.
 
 
 

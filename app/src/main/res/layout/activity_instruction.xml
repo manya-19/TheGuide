@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InstructionActivity"
+    android:background="@drawable/whitebag"
     android:padding="16dp">
 
     <LinearLayout
@@ -22,6 +23,7 @@
             android:layout_height="380dp"
             android:scrollbars="vertical"
             android:text="@string/instructions"
+            android:textSize="15dp"
             tools:textColor="@android:color/black"
             tools:textColorHint="@android:color/black" />
     </LinearLayout>

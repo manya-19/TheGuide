@@ -62,12 +62,10 @@ public class HomeActivity extends AppCompatActivity {
         List<Data> data = new ArrayList<>();
 
         data.add(new Data("Lucknow", "City of Nawabs", R.drawable.lko));
-        data.add(new Data("Agra", "Agra is a city in northern India’s Uttar Pradesh state. It's home to the iconic Taj Mahal, a mausoleum built for the Mughal ruler Shah Jahan’s wife, Mumtaz Mahal (who died in childbirth in 1631). ", R.drawable.ic_launcher_background));
-        data.add(new Data("Varanasi", "Varanasi is a city in the northern Indian state of Uttar Pradesh dating to the 11th century B.C. ", R.drawable.ic_launcher_background));
-        data.add(new Data("Allahabad", "Allahabad is a city in Uttar Pradesh state, north India. ", R.drawable.ic_launcher_background));
-        data.add(new Data("Delhi", "Delhi, India’s capital territory, is a massive metropolitan area in the country’s north ", R.drawable.ic_launcher_background));
-        data.add(new Data("Mumbai", "Mumbai (formerly called Bombay) is a densely populated city on India’s west coast. ", R.drawable.ic_launcher_background));
-        data.add(new Data("Srinagar", "Srinagar is the largest city and the summer capital of the Indian state of Jammu and Kashmir.  ", R.drawable.ic_launcher_background));
+        data.add(new Data("Agra", "Agra is a city in northern India’s Uttar Pradesh state. It's home to the iconic Taj Mahal, a mausoleum built for the Mughal ruler Shah Jahan’s wife, Mumtaz Mahal (who died in childbirth in 1631). ", R.drawable.agra));
+        data.add(new Data("Varanasi", "Varanasi is a city in the northern Indian state of Uttar Pradesh dating to the 11th century B.C. ", R.drawable.vara));
+        data.add(new Data("Delhi", "Delhi, India’s capital territory, is a massive metropolitan area in the country’s north ", R.drawable.delhi));
+
 
 
         return data;
