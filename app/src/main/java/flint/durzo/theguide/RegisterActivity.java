@@ -119,10 +119,13 @@ public class RegisterActivity extends AppCompatActivity {
             switch (webPage) {
                 case "exists":
                     Toast.makeText(RegisterActivity.this, "User Already Exists", Toast.LENGTH_SHORT).show();
+                    finish();
                     break;
                 case "success":
                     Toast.makeText(RegisterActivity.this, "Registration Success", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(RegisterActivity.this, VerifyEmailActivity.class));
+                    Intent intent = new Intent(RegisterActivity.this, VerifyEmailActivity.class);
+                    intent.putExtra("email", email.getText().toString());
+                    startActivity(intent);
                     break;
                 default:
                     Toast.makeText(RegisterActivity.this, "Some Error Occurred", Toast.LENGTH_SHORT).show();

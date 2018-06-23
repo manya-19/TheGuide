@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:gravity="center_horizontal"
-        android:text="You have been mailed a four digit code. Please enter the code below to verify your email address." />
+        android:text="You have been mailed a four digit code. Please enter the code below to verify your email address. Please check your spam folder too." />
 
     <EditText
         android:id="@+id/code"
